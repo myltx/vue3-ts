@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo 提交代码前需要先进行单元测试
+# 执行测试
+npm run test:unit
