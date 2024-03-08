@@ -1,12 +1,13 @@
 # h5-vue3-ts
 
 ## 技术栈 
-- [Vite](https://cn.vitejs.dev/)
-- [Vue](https://cn.vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [Vue](https://vuejs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/)
 - [VueRouter](https://router.vuejs.org/zh/)
 - [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import)
+- [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components)
 
 ## Vscode Plugins
 

@@ -25,7 +25,7 @@ export default {
     'subject-empty': [2, 'never'], // subject不能为空
     'subject-case': [0],
     'subject-full-stop': [0, 'never', '.'], // subject以.为结束标记
-    'header-max-length': [2, 'always', 72], // header最长72
+    'header-max-length': [2, 'always', 100], // header最长72
     'body-leading-blank': [0], // body换行
     'footer-leading-blank': [0, "always"], // footer以空行开头
   },
