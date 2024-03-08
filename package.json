@@ -61,10 +61,9 @@
     "src/**/*.{js,jsx,ts,tsx}": "eslint"
   },
   "husky": {
-    "pre-commit": "echo 我要提交代码啦 && pnpm lint-staged",
-    "commit-msg": "echo $HUSKY_GIT_PARAMS $HUSKY_GIT_STDIN && commitlint -E HUSKY_GIT_PARAMS",
-    "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true",
-    "pre-push": "echo 提交代码前需要先进行单元测试 && npm run test:unit"
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
   },
   "config": {
     "commitizen": {
