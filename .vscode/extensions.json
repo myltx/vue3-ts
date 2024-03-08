@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "hollowtree.vue-snippets",
     "sdras.vue-vscode-snippets",
     "antfu.unocss",
     "simonhe.unot",
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint",
   ]
 }

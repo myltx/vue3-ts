@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 运行 ESLint 检查
+npm run lint --silent 
+npm run lint:style --silent
+git add .
+npm run commitlint
