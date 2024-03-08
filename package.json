@@ -7,6 +7,7 @@
     "dev": "vite",
     "build-type": "run-p type-check \"build {@}\" --",
     "preview": "vite preview",
+    "test": "vitest run",
     "test:unit": "vitest",
     "build": "vite build",
     "type-check": "vue-tsc --build --force",
@@ -15,10 +16,12 @@
     "prepare": "husky",
     "lint:style": "lint-staged",
     "commit": "cz",
-    "commitlint": "commitlint --config commitlint.config.ts --edit"
+    "commitlint": "commitlint --config commitlint.config.ts --edit",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "@unocss/reset": "^0.58.5",
+    "cz-conventional-changelog-zh": "^0.0.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
@@ -37,6 +40,7 @@
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
+    "conventional-changelog-cli": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
@@ -54,7 +58,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "./node_modules/cz-conventional-changelog-zh"
     }
   },
   "lint-staged": {
@@ -65,18 +69,18 @@
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
     "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "commitlint": {
     "rules": {
-      "references-empty": [2, "never"]
+      "references-empty": [
+        2,
+        "never"
+      ]
     },
     "parserPreset": {
       "parserOpts": {
-        "issuePrefixes": ["PROJ-"]
+        "issuePrefixes": [
+          "PROJ-"
+        ]
       }
     }
   }

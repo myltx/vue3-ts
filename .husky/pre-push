@@ -3,4 +3,5 @@
 
 echo 提交代码前需要先进行单元测试
 # 执行测试
-npm run test:unit
+npm run test
+echo 测试完成

@@ -41,67 +41,132 @@ export default {
     },
     questions: {
       type: {
-        description: "Select the type of change that you're committing:",
+        description: "选择你要提交的类型:",
         enum: {
           feat: {
-            description: 'A new feature',
+            description: '新功能、新特性',
             title: 'Features',
             emoji: '✨'
           },
           fix: {
-            description: 'A bug fix',
+            description: '修改 bug',
             title: 'Bug Fixes',
             emoji: '🐛'
           },
           docs: {
-            description: 'Documentation only changes',
+            description: '文档修改',
             title: 'Documentation',
             emoji: '📚'
           },
           style: {
             description:
-              'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
+              '代码格式修改, 注意不是 css 修改（例如分号修改）',
             title: 'Styles',
             emoji: '💎'
           },
           refactor: {
-            description: 'A code change that neither fixes a bug nor adds a feature',
+            description: '代码重构（重构，在不影响代码内部行为、功能下的代码修改）',
             title: 'Code Refactoring',
             emoji: '📦'
           },
           perf: {
-            description: 'A code change that improves performance',
+            description: '更改代码，以提高性能（在不影响代码内部行为的前提下，对程序性能进行优化）',
             title: 'Performance Improvements',
             emoji: '🚀'
           },
           test: {
-            description: 'Adding missing tests or correcting existing tests',
+            description: '测试用例新增、修改',
             title: 'Tests',
             emoji: '🚨'
           },
           build: {
             description:
-              'Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)',
+              '影响项目构建或依赖项修改 (示例: gulp, broccoli, npm)',
             title: 'Builds',
             emoji: '🛠'
           },
           ci: {
             description:
-              'Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)',
+              '持续集成相关文件修改 (示例: Travis, Circle, BrowserStack, SauceLabs)',
             title: 'Continuous Integrations',
             emoji: '⚙️'
           },
           chore: {
-            description: "Other changes that don't modify src or test files",
+            description: "其他修改（不在上述类型中的修改）",
             title: 'Chores',
             emoji: '♻️'
           },
           revert: {
-            description: 'Reverts a previous commit',
+            description: '恢复上一次提交',
             title: 'Reverts',
+            emoji: '🗑'
+          },
+          workflow: {
+            description: '工作流相关文件修改',
+            title: 'Workflow',
             emoji: '🗑'
           }
         }
+        // enum: {
+        //   feat: {
+        //     description: 'A new feature',
+        //     title: 'Features',
+        //     emoji: '✨'
+        //   },
+        //   fix: {
+        //     description: 'A bug fix',
+        //     title: 'Bug Fixes',
+        //     emoji: '🐛'
+        //   },
+        //   docs: {
+        //     description: 'Documentation only changes',
+        //     title: 'Documentation',
+        //     emoji: '📚'
+        //   },
+        //   style: {
+        //     description:
+        //       'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
+        //     title: 'Styles',
+        //     emoji: '💎'
+        //   },
+        //   refactor: {
+        //     description: 'A code change that neither fixes a bug nor adds a feature',
+        //     title: 'Code Refactoring',
+        //     emoji: '📦'
+        //   },
+        //   perf: {
+        //     description: 'A code change that improves performance',
+        //     title: 'Performance Improvements',
+        //     emoji: '🚀'
+        //   },
+        //   test: {
+        //     description: 'Adding missing tests or correcting existing tests',
+        //     title: 'Tests',
+        //     emoji: '🚨'
+        //   },
+        //   build: {
+        //     description:
+        //       'Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)',
+        //     title: 'Builds',
+        //     emoji: '🛠'
+        //   },
+        //   ci: {
+        //     description:
+        //       'Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)',
+        //     title: 'Continuous Integrations',
+        //     emoji: '⚙️'
+        //   },
+        //   chore: {
+        //     description: "Other changes that don't modify src or test files",
+        //     title: 'Chores',
+        //     emoji: '♻️'
+        //   },
+        //   revert: {
+        //     description: 'Reverts a previous commit',
+        //     title: 'Reverts',
+        //     emoji: '🗑'
+        //   }
+        // }
       },
       scope: {
         description: 'What is the scope of this change (e.g. component or file name)'
