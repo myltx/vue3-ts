@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const ad = ref(1)
 </script>
 
 <template>

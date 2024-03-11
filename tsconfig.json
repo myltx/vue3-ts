@@ -14,7 +14,7 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["element-plus/global"]
+    "types": ["element-plus/global"],
   },
   "exclude": ["node_modules", "tests/server/**/*.ts", "dist", "**/*.js"]
 }

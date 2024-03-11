@@ -1,5 +1,5 @@
   {
-    "unocss.root": "packages/client",
+    // "unocss.root": "packages/client",
     "typescript.tsdk": "./node_modules/typescript/lib",
     "volar.tsPlugin": true,
     "volar.tsPluginStatus": false,
@@ -182,9 +182,9 @@
       "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,LICENSE,.gitattributes,.gitignore,.gitpod.yml,CNAME,README*,.npmrc,.browserslistrc",
       ".eslintrc.js": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.js,.prettierrc.js,.stylelintrc.js"
     },
-    "terminal.integrated.scrollback": 10000,
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    // "terminal.integrated.scrollback": 10000,
+    // "typescript.tsdk": "node_modules/typescript/lib",
+    // "[javascript]": {
+    //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // }
   }
