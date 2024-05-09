@@ -25,6 +25,7 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '~/': `${pathSrc}/`,
+      '#/': path.resolve(__dirname, 'types'),
     }
   },
   css: {
@@ -149,5 +150,12 @@ export default defineConfig({
     open: false,
     host: '0.0.0.0',
     strictPort: false,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
