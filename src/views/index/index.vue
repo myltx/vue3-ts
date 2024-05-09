@@ -1,10 +1,7 @@
-<script setup lang="ts">
-const ad = ref(1)
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <Loading />
-  <div>122</div>
+  <div class="text-green-600 font-600">我进来了</div>
 </template>
 
 <style scoped lang="scss"></style>

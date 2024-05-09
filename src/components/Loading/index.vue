@@ -8,7 +8,7 @@ const props = defineProps({
 })
 </script>
 <template>
-	{{ msg }}
+	{{ props.msg }}
 	<div>
 		loading
 	</div>
