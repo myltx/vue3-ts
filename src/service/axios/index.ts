@@ -36,7 +36,7 @@ const httpServer = (config: any) => {
   if (host.split(':')[0] === 'localhost') {
     baseURL = '/api/api/'
   } else {
-    baseURL = `${protocol}//${host}${import.meta.env.VITE_GLOB_API_URL}/api/`
+    baseURL = `${protocol}//${host}/api/`
   }
   const httpDefaultOpts: any = {
     method,
