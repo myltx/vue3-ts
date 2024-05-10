@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ResourceTypeEnum } from '@/enums/biz/authority'
 import type { FormInstance, FormRules } from 'element-plus'
-import { iconNameList } from '../../../main'
+// import { iconNameList } from '../../../main'
 
 const router = useRouter()
-
+const iconNameList = []
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
   parentId: '',
@@ -25,7 +25,7 @@ const treeData = ref([])
 const rules = reactive<FormRules<typeof ruleForm>>({})
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  formEl.validate((valid) => {
+  formEl.validate((valid: boolean) => {
     if (valid) {
       console.log('submit!')
     } else {
@@ -39,7 +39,7 @@ const resetForm = () => {
   router.go(-1)
 }
 
-function handleIcon(icon) {
+function handleIcon(icon: string) {
   ruleForm.icon = icon
 }
 </script>
