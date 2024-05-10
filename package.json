@@ -50,6 +50,7 @@
     "conventional-changelog-cli": "^4.1.0",
     "crypto-js": "^4.2.0",
     "cz-conventional-changelog": "^3.3.0",
+    "e-icon-picker": "^2.2.0",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "husky": "^9.0.11",

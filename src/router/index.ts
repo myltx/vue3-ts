@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Index from '@/views/index/index.vue'
 import Login from '@/views/sys/login/index.vue'
+import Menu from '@/views/sys/menu/index.vue'
 import Layout from '@/layouts/index.vue'
 import { getToken } from '@/utils'
 const router = createRouter({
@@ -16,6 +17,11 @@ const router = createRouter({
           path: '/index',
           name: 'Index',
           component: Index
+        },
+        {
+          path: '/menu',
+          name: 'Menu',
+          component: Menu
         }
       ]
     },
