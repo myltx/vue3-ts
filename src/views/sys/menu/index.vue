@@ -25,7 +25,7 @@ const treeData = ref([])
 const rules = reactive<FormRules<typeof ruleForm>>({})
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  formEl.validate((valid) => {
+  formEl.validate((valid: boolean) => {
     if (valid) {
       console.log('submit!')
     } else {
@@ -39,7 +39,7 @@ const resetForm = () => {
   router.go(-1)
 }
 
-function handleIcon(icon) {
+function handleIcon(icon: string) {
   ruleForm.icon = icon
 }
 </script>
