@@ -7,7 +7,6 @@ const LOGIN_OUT_PATH = '/login'
 // 成功处理函数
 export function handleSuccess(res: any, resolve: Function) {
   const data: any = res.data
-  console.log(data)
   if (data.success == false) {
     // 未登录
     if (NOLOGIN.includes(data.code)) {
