@@ -36,8 +36,7 @@ const httpServer = (config: any) => {
   if (host.split(':')[0] === 'localhost') {
     baseURL = '/api/api/'
   } else {
-    // https://n.e.myltx.top
-    baseURL = `/api/`
+    baseURL = `https://n.e.myltx.top/api/`
   }
   const httpDefaultOpts: any = {
     method,
