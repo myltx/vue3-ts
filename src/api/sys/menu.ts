@@ -1,13 +1,44 @@
-import { defHttp } from '@/utils/http/axios';
+import { ApiPrefixEnum } from '@/enums/httpEnum'
+import { Axios } from '@/service'
 
-import { getMenuListResultModel } from './model/menuModel';
+export const addMenu = (data: any) =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/add`,
+    data
+  })
 
-enum Api {
-  GetMenuList = '/getMenuList',
-}
+export const updateMenu = (data: any) =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/update`,
+    data
+  })
 
-/**
- * @description: Get user menu based on id
- */
+export const deleteMenu = (data: any) =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/delete`,
+    data
+  })
 
-export const getMenuList = () => defHttp.get<getMenuListResultModel>({ url: Api.GetMenuList });
+export const getMenuList = (data: any) =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/list`,
+    data
+  })
+
+export const getMenuTree = (data: any): any =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/getTree`,
+    data
+  })
+
+export const getMenuTreeDetail = (data: any): any =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/detail`,
+    data
+  })
