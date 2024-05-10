@@ -31,12 +31,12 @@ const httpServer = (config: any) => {
   //   http 默认配置
   const method = config?.method.toUpperCase()
   let baseURL = ''
-  const protocol = window.location.protocol
+  // const protocol = window.location.protocol
   const host = window.location.host
   if (host.split(':')[0] === 'localhost') {
     baseURL = '/api/api/'
   } else {
-    baseURL = `${protocol}//${host}${import.meta.env.VITE_GLOB_API_URL}/api/`
+    baseURL = `https://n.e.myltx.top//api/`
   }
   const httpDefaultOpts: any = {
     method,

@@ -4,6 +4,7 @@
     <div class="flex main-container">
       <BaseSide />
       <div class="p-20px w-100%">
+        <RouterView />
       </div>
     </div>
   </el-config-provider>
