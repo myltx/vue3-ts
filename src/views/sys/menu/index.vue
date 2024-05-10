@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ResourceTypeEnum } from '@/enums/biz/authority'
 import type { FormInstance, FormRules } from 'element-plus'
-// import { iconNameList } from '../../../main'
+import { iconNameList } from '../../../main'
 
 const router = useRouter()
-const iconNameList = []
+
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
   parentId: '',
