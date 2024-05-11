@@ -11,6 +11,7 @@ declare module 'vue' {
     BaseSide: typeof import('./components/Layouts/BaseSide.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContaine: typeof import('element-plus/es')['ElContaine']
     ElContainer: typeof import('element-plus/es')['ElContainer']
