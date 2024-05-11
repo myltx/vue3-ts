@@ -2,7 +2,8 @@
 import useUserStore, { type SubmitLoginData } from '@/stores/model/user'
 import { AesEncryption } from '@/utils/aes'
 import { ElMessage, type FormRules } from 'element-plus'
-import { toggleDark } from '@/composables'
+import { useDarkMode } from '@/composables'
+const { toggleDarkMode } = useDarkMode()
 
 const { replace } = useRouter()
 const checkRemember = ref(false)
@@ -141,7 +142,7 @@ async function onSubmit() {
           <button
             class="border-none w-full bg-transparent cursor-pointer"
             style="height: var(--ep-menu-item-height)"
-            @click="toggleDark()"
+            @click="toggleDarkMode"
           >
             <i class="cursor-pointer text-20px" inline-flex i="dark:ep-moon ep-sunny" />
           </button>
