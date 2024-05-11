@@ -1,6 +1,6 @@
 import { removeLocalStorage } from '@/utils'
 import { TIMEOUT, OTHER, NOLOGIN } from './error-code'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { message,Modal } from 'ant-design-vue'
 
 const LOGIN_OUT_PATH = '/login'
 
@@ -10,18 +10,16 @@ export function handleSuccess(res: any, resolve: Function) {
   if (data.success == false) {
     // 未登录
     if (NOLOGIN.includes(data.code)) {
-      ElMessageBox.alert(data.msg || data.message, '', {
-        confirmButtonText: '确定',
-      }).then(() => {
-        removeLocalStorage()
-        window.location.hash = LOGIN_OUT_PATH
-      })
+      Modal.info({
+        content:data.msg || data.message,
+        onOk() {
+          removeLocalStorage()
+          window.location.hash = LOGIN_OUT_PATH
+        },
+      });
     } else {
       const msg: any = data.msg || data.message
-      ElMessage({
-        message: msg,
-        type: 'warning'
-      })
+      message.warning(msg)
     }
   }
   resolve(data)
@@ -32,52 +30,38 @@ export function handleError(error: any, reject: Function) {
   console.log(error, 'error')
   console.log(error.response)
   if (error.code == TIMEOUT) {
-    ElMessage({
-      message: '请求超时',
-      type: 'error'
-    })
+    message.error('请求超时')
   } else if (error.response && error.response.data) {
     if (error.response.status === 500) {
-      ElMessage({
-        message: error.response.data,
-        type: 'error'
-      })
+      message.error(error.response.data)
     }
     if (NOLOGIN.includes(error.response.data.code)) {
-      ElMessageBox.alert(error.response.data.errorMsg || error.response.data.msg, '',{
-        confirmButtonText: '确定',
-      }).then(() => {
-        removeLocalStorage()
-        window.location.hash = LOGIN_OUT_PATH
-      })
-    } else {
-      const resData = error.response.data
-
-      if (OTHER.includes(resData.code)) {
-        ElMessageBox.alert(resData.msg || resData.message, '',{
-          confirmButtonText: '确定',
-        }).then(() => {
+      Modal.info({
+        content:error.response.data.errorMsg || error.response.data.msg,
+        onOk() {
           removeLocalStorage()
           window.location.hash = LOGIN_OUT_PATH
-        })
+        },
+      });
+    } else {
+      const resData = error.response.data
+      if (OTHER.includes(resData.code)) {
+        Modal.info({
+          content:error.response.data.errorMsg || error.response.data.msg,
+          onOk() {
+            removeLocalStorage()
+            window.location.hash = LOGIN_OUT_PATH
+          },
+        });
       } else if (resData.msg) {
-        ElMessage({
-          message: resData.msg,
-          type: 'warning'
-        })
+        message.warning(resData.msg)
       } else if (resData.message) {
-        ElMessage({
-          message: resData.message,
-          type: 'warning'
-        })
+        message.warning(resData.message)
         window.location.hash = LOGIN_OUT_PATH
       }
     }
   } else if (error.message || error.msg) {
-    ElMessage({
-      message: error.message || error.msg,
-      type: 'warning'
-    })
+    message.warning(error.message || error.msg)
   }
   reject(error)
 }

@@ -8,8 +8,9 @@ interface Tree {
 }
 const detailData = ref({})
 const editRef = ref()
-const handleNodeClick = async (data: Tree) => {
-  const result = await getMenuTreeDetail({ id: data.id })
+const handleNodeClick = async (keys: number[]) => {
+  console.log(keys, 'key')
+  const result = await getMenuTreeDetail({ id: keys[0] })
   detailData.value = result.data || {}
   editRef.value.setFormData(detailData.value)
 }
@@ -26,7 +27,8 @@ function handleAddNode() {
 
 const defaultProps = {
   children: 'children',
-  label: 'label'
+  title: 'label',
+  key: 'id'
 }
 // function append(data: any) {
 //   console.log(data)
@@ -42,33 +44,33 @@ function handleSuccess() {
 </script>
 
 <template>
-  <el-container>
-    <el-aside width="300px" class="mr-20px p-10px h-100%">
+  <a-flex>
+    <div class="mr-20px p-10px h-100% w-200px">
       <div class="flex mb-10px">
-        <el-button type="primary" size="small" @click="handleAddNode">添加节点</el-button>
+        <a-button type="primary" size="small" @click="handleAddNode">添加节点</a-button>
       </div>
-      <el-tree
+      <a-tree
         default-expand-all
-        :data="treeData"
-        :props="defaultProps"
-        @node-click="handleNodeClick"
+        :treeData="treeData"
+        :fieldNames="defaultProps"
+        showLine
+        @select="handleNodeClick"
       >
-        <!-- data -->
-        <template #default="{ node }">
+        <!-- <template #default="{ node }">
           <span class="custom-tree-node flex justify-between w-100%">
             <span>{{ node.label }}</span>
             <span>
-              <!-- <el-icon @click.stop="append(data)" color="green"><Plus /></el-icon>
-              <el-icon @click.stop="remove(node, data)" class="ml-10px" color="red"
+              <a-icon @click.stop="append(data)" color="green"><Plus /></a-icon>
+              <a-icon @click.stop="remove(node, data)" class="ml-10px" color="red"
                 ><Delete
-              /></el-icon> -->
+              /></a-icon>
             </span>
           </span>
-        </template>
-      </el-tree>
-    </el-aside>
-    <el-main>
+        </template> -->
+      </a-tree>
+    </div>
+    <div>
       <Edit ref="editRef" @success="handleSuccess" />
-    </el-main>
-  </el-container>
+    </div>
+  </a-flex>
 </template>

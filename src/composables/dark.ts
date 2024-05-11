@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-
+import { theme } from 'ant-design-vue';
 export enum Theme {
   DARK = 'dark',
   LIGHT = 'light'
@@ -9,6 +9,7 @@ const DARK_MODE = 'DARK_MODE'
 
 const darkMode = ref(Theme.LIGHT)
 export function useDarkMode() {
+  const themeConfig = ref(theme.defaultAlgorithm)
   const isAppearanceTransition =
     // @ts-expect-error: Transition API
     document.startViewTransition && !window.matchMedia(`(prefers-reduced-motion: reduce)`).matches
@@ -61,6 +62,7 @@ export function useDarkMode() {
           pseudoElement: isDark ? '::view-transition-new(root)' : '::view-transition-old(root)'
         }
       )
+      themeConfig.value = !isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
     })
   }
 
@@ -82,6 +84,7 @@ export function useDarkMode() {
     setDarkMode,
     toggleDarkMode,
     initDarkMode,
-    darkMode
+    darkMode,
+    themeConfig,
   }
 }

@@ -1,8 +1,5 @@
-// import dark theme
-@use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
-
 // :root {
-//   --ep-color-primary: red;
+  // --ep-color-primary: red;
 // }
 
 /** 自定义黑暗主题 */
@@ -10,13 +7,36 @@ html.dark {
   // * admin
   --v-bg-color: #141414;
   --v-main-bg-color: #0d0d0d;
+  --v-main-bg-color-white: #fff;
   --v-border-light: 1px solid #4c4c4d;
   .login-container {
     background-color: var(--v-main-bg-color);
+    .title {
+      color: var(--v-main-bg-color);
+    }
     .left-container {
       background-color: var(--v-main-bg-color);
     }
   }
+  .ant-layout-sider {
+    background-color: var(--v-main-bg-color) !important;
+  }
+  .ant-layout-header {
+    background-color: var(--v-main-bg-color) !important;
+  }
+  .ant-layout-content {
+    background-color: var(--v-main-bg-color) !important;
+  }
+}
+.ant-layout-sider {
+  background: #fff !important;
+}
+
+.ant-layout-header {
+  background: #fff!important;
+}
+.ant-layout-content {
+  background: #fff!important;
 }
 
 body {

@@ -1,4 +1,3 @@
-import { ElMessage } from 'element-plus'
 import { login, getUserInfo } from '@/api/sys/login'
 import { defineStore } from 'pinia'
 import { setToken, setUserInfo } from '@/utils'
@@ -18,10 +17,10 @@ const useUserStore = defineStore('useUSerStore', () => {
       setToken(loginData.data.token)
       handleSuccess()
     } catch (error) {
-      ElMessage({
-        message: '登录失败',
-        type: 'warning'
-      })
+      // ElMessage({
+      //   message: '登录失败',
+      //   type: 'warning'
+      // })
     }
   }
   async function handleSuccess() {
