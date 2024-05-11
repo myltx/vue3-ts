@@ -1,7 +1,7 @@
 <template>
   <el-config-provider>
     <BaseHeader />
-    <div class="flex main-container ">
+    <div class="flex main-container">
       <BaseSide />
       <div class="p-20px w-100%">
         <RouterView />

@@ -1,7 +1,7 @@
 <template>
   <el-config-provider>
-    <div class="flex main-container">
-      <div class="p-20px w-100%">
+    <div class="flex main-container w-100% h-100%">
+      <div class="w-100%">
         <RouterView />
       </div>
     </div>
@@ -12,6 +12,8 @@
 #app {
   text-align: center;
   color: var(--ep-text-color-primary);
+  height: 100vh;
+  width: 100vw;
 }
 
 .main-container {
