@@ -1,16 +1,19 @@
+<script setup lang="ts">
+import { theme } from 'ant-design-vue'
+import { useDarkMode } from '@/composables/index'
+const { themeConfig } = useDarkMode()
+
+setTimeout(() => {
+  themeConfig.value = theme.darkAlgorithm
+}, 2000)
+console.log(themeConfig.value, 'themeConfig')
+</script>
 <template>
-  <el-config-provider>
-    <div class="flex main-container w-100% h-100%">
-      <div class="w-100%">
-        <RouterView />
-      </div>
-    </div>
-  </el-config-provider>
+  <RouterView />
 </template>
 
 <style>
 #app {
-  text-align: center;
   color: var(--ep-text-color-primary);
   height: 100vh;
   width: 100vw;

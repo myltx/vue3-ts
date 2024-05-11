@@ -6,7 +6,6 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
-  const [alias]: typeof import('[package-name]')['[from]']
   const axios: typeof import('axios')['default']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
@@ -59,7 +58,6 @@ declare global {
   const useDark: typeof import('@vueuse/core')['useDark']
   const useLink: typeof import('vue-router')['useLink']
   const useMouse: typeof import('@vueuse/core')['useMouse']
-  const useMyFetch: typeof import('@vueuse/core')['useFetch']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']

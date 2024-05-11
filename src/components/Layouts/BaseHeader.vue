@@ -1,33 +1,34 @@
-<script lang="ts" setup>
-import { useDarkMode } from '@/composables'
-const { toggleDarkMode } = useDarkMode()
+<script setup lang="ts">
+const routes = [
+  {
+    path: 'index',
+    breadcrumbName: 'First-level Menu'
+  },
+  {
+    path: 'first',
+    breadcrumbName: 'Second-level Menu'
+  },
+  {
+    path: 'second',
+    breadcrumbName: 'Third-level Menu'
+  }
+]
 </script>
-
 <template>
-  <el-menu class="el-menu-demo" mode="horizontal">
-    <el-menu-item index="1">Element Plus</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3" disabled>Info</el-menu-item>
-    <el-menu-item index="4">Orders</el-menu-item>
-    <el-menu-item h="full">
-      <button
-        class="border-none w-full bg-transparent cursor-pointer"
-        style="height: var(--ep-menu-item-height)"
-        @click="toggleDarkMode"
-      >
-        <i inline-flex i="dark:ep-moon ep-sunny" />
-      </button>
-    </el-menu-item>
-  </el-menu>
+  <div>
+    <a-page-header class="demo-page-header" :breadcrumb="{ routes }" style="border: 1px solid rgb(235, 237, 240)">
+      <template #extra>
+        <a-button key="3">Operation</a-button>
+        <a-button key="2">Operation</a-button>
+        <a-button key="1" type="primary">Primary</a-button>
+      </template>
+    </a-page-header>
+    <br />
+  </div>
 </template>
+
+<style scoped>
+.demo-page-header :deep(tr:last-child td) {
+  padding-bottom: 0;
+}
+</style>

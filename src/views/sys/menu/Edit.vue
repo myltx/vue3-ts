@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ResourceTypeEnum } from '@/enums/biz/authority'
-import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from 'element-plus'
+import { message, Modal } from 'ant-design-vue'
 import { iconNameList } from '../../../main'
 import { addMenu, deleteMenu, getMenuTree, updateMenu } from '@/api/sys/menu'
 
 const router = useRouter()
 const emits = defineEmits(['success'])
 
-const ruleFormRef = ref<FormInstance>()
+const ruleFormRef = ref()
 let ruleForm: any = reactive({
-  parentId: '',
+  parentId: undefined,
   label: '',
   resourceType: ResourceTypeEnum.MENU,
   state: 1,
@@ -23,28 +23,23 @@ let ruleForm: any = reactive({
 })
 const treeData: any = ref([])
 
-const rules = reactive<FormRules<typeof ruleForm>>({})
-const submitForm = (formEl: FormInstance | undefined) => {
+const rules = reactive({})
+const submitForm = () => {
   const requestFn = ruleForm?.id ? updateMenu : addMenu
-  if (!formEl) return
-  formEl.validate(async (valid: boolean) => {
-    if (valid) {
+  ruleFormRef.value
+    .validate()
+    .then(async () => {
       const data: any = await requestFn(ruleForm)
       if (data.success) {
-        ElMessage({
-          message: '提交成功',
-          type: 'success'
-        })
+        message.success('提交成功')
+
         ruleFormRef.value?.resetFields()
         getTree()
         emits('success')
       }
-      return Promise.resolve(data)
-    } else {
-      console.log('error submit!')
-      return Promise.reject('必填项未填写完全')
-    }
-  })
+    })
+    .catch((error: any) => {
+    })
 }
 function resetForm() {
   ruleFormRef.value?.resetFields()
@@ -62,30 +57,23 @@ async function getTree() {
   treeData.value = data?.data || []
 }
 async function deleteMenuNode() {
-  ElMessageBox.confirm('选中节点及其子结点将被永久删除, 是否确定删除？', '', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  })
-    .then(async () => {
+  Modal.confirm({
+    content: '选中节点及其子结点将被永久删除, 是否确定删除？',
+    async onOk() {
       const data: any = await deleteMenu({ id: ruleForm.id })
       console.log(data)
       if (data.success) {
-        ElMessage({
-          message: '删除成功',
-          type: 'success'
-        })
+        message.success('删除成功')
         ruleFormRef.value?.resetFields()
         getTree()
         emits('success')
       }
-    })
-    .catch(() => {
-      ElMessage({
-        type: 'info',
-        message: 'Delete canceled'
-      })
-    })
+    },
+    onCancel() {
+      console.log('Cancel')
+    },
+    class: 'test'
+  })
 }
 function underscoreToCamel(str: string) {
   return str.replace(/_([a-z])/g, function (match: any, letter: any) {
@@ -108,146 +96,130 @@ defineExpose({
 })
 </script>
 <template>
-  <el-form
+  <a-form
     ref="ruleFormRef"
-    style="max-width: 600px"
-    label-suffix="："
+    style="width: 400px"
+    :label-col="{ style: { width: '150px' } }"
     :model="ruleForm"
-    status-icon
     :rules="rules"
-    label-width="auto"
-    class="demo-ruleForm"
   >
-    <el-form-item label="id" prop="id" v-show="false">
-      <el-input v-model="ruleForm.id" clearable />
-    </el-form-item>
-    <el-form-item label="上级菜单" prop="parentId">
-      <el-tree-select
-        v-model="ruleForm.parentId"
-        :data="treeData"
+    <a-form-item label="id" name="id" v-show="false">
+      <a-input v-model:value="ruleForm.id" allowClear style="width: 100%" placeholder="请输入" />
+    </a-form-item>
+    <a-form-item label="上级菜单" name="parentId">
+      <a-tree-select
+        v-model:value="ruleForm.parentId"
+        :tree-data="treeData"
         :render-after-expand="false"
         check-strictly
-        :props="{ value: 'id' }"
+        :fieldNames="{ value: 'id' }"
         placeholder="请选择"
-        clearable
+        allowClear
         :disabled="ruleForm.id"
       />
-    </el-form-item>
-    <el-form-item label="名称" prop="label">
-      <el-input v-model="ruleForm.label" clearable />
-    </el-form-item>
-    <el-form-item label="类型" prop="resourceType">
-      <el-radio-group v-model="ruleForm.resourceType" class="ml-4">
-        <el-radio :value="ResourceTypeEnum.MENU" size="large">菜单</el-radio>
-        <el-radio :value="ResourceTypeEnum.DATA" size="large">数据</el-radio>
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="状态" prop="state">
-      <el-switch
-        v-model="ruleForm.state"
-        :active-value="1"
-        :inactive-value="0"
+    </a-form-item>
+    <a-form-item label="名称" required name="label">
+      <a-input v-model:value="ruleForm.label" allowClear placeholder="请输入" />
+    </a-form-item>
+    <a-form-item label="类型" name="resourceType">
+      <a-radio-group v-model:value="ruleForm.resourceType" class="ml-4">
+        <a-radio :value="ResourceTypeEnum.MENU" size="large">菜单</a-radio>
+        <a-radio :value="ResourceTypeEnum.DATA" size="large">数据</a-radio>
+      </a-radio-group>
+    </a-form-item>
+    <a-form-item label="状态" name="state">
+      <a-switch
+        v-model:checked="ruleForm.state"
+        :checkedValue="1"
+        :unCheckedValue="0"
         class="mt-2"
         style="margin-left: 24px"
         inline-prompt
-        :active-text="'启用'"
-        :inactive-text="'禁用'"
+        :checkedChildren="'启用'"
+        :unCheckedChildren="'禁用'"
       />
-    </el-form-item>
-    <el-form-item label="通用菜单" prop="isGeneral">
-      <el-switch
-        v-model="ruleForm.isGeneral"
-        :active-value="1"
-        :inactive-value="0"
+    </a-form-item>
+    <a-form-item label="通用菜单" name="isGeneral">
+      <a-switch
+        v-model:checked="ruleForm.isGeneral"
+        :checkedValue="1"
+        :unCheckedValue="0"
         class="mt-2"
         style="margin-left: 24px"
         inline-prompt
-        :active-text="'是'"
-        :inactive-text="'否'"
+        :checkedChildren="'是'"
+        :unCheckedChildren="'否'"
       />
-    </el-form-item>
-    <el-form-item label="是否显示" prop="isShow">
-      <el-switch
-        v-model="ruleForm.isShow"
-        :active-value="1"
-        :inactive-value="0"
+    </a-form-item>
+    <a-form-item label="是否显示" name="isShow">
+      <a-switch
+        v-model:checked="ruleForm.isShow"
+        :checkedValue="1"
+        :unCheckedValue="0"
         class="mt-2"
         style="margin-left: 24px"
         inline-prompt
-        :active-text="'是'"
-        :inactive-text="'否'"
+        :checkedChildren="'是'"
+        :unCheckedChildren="'否'"
       />
-    </el-form-item>
-    <el-form-item label="排序" prop="sortValue">
-      <el-input v-model.number="ruleForm.sortValue" clearable />
-    </el-form-item>
-    <el-form-item label="地址栏路径" prop="path">
-      <template #label>
-        <span class="flex items-center">
-          地址栏路径
-          <el-tooltip effect="dark" content="浏览器地址栏 # 号后的路径" placement="top">
-            <el-icon><Warning /></el-icon>
-          </el-tooltip>
-          ：
-        </span>
-      </template>
-      <el-input v-model.number="ruleForm.path" clearable />
-    </el-form-item>
-    <el-form-item label="页面路径" prop="component">
-      <template #label>
-        <span class="flex items-center">
-          页面路径
-          <el-tooltip
-            class="box-item"
-            effect="dark"
-            content="前端项目src/views后的页面路径"
-            placement="top"
-          >
-            <el-icon><Warning /></el-icon>
-          </el-tooltip>
-          ：
-        </span>
-      </template>
-      <el-input v-model.number="ruleForm.component" clearable>
-        <template #prepend>@/views</template>
-      </el-input>
-    </el-form-item>
-    <el-form-item label="菜单图标" prop="icon">
-      <el-input v-model.number="ruleForm.icon" clearable>
-        <template #append>
-          <el-popover placement="top-start" title="" :width="200" trigger="click" conm>
-            <template #reference>
-              <el-icon class="cursor-pointer"><Grid /></el-icon>
-            </template>
-            <div class="h-200px overflow-y-auto grid grid-cols-5">
-              <div v-for="icon in iconNameList" :key="icon" class="cursor-pointer h-35px text-20px">
-                <el-tooltip class="box-item" effect="dark" :content="icon" placement="top">
-                  <el-icon @click="handleIcon(icon)">
-                    <component :is="icon"></component>
-                  </el-icon>
-                </el-tooltip>
+    </a-form-item>
+    <a-form-item label="排序" name="sortValue">
+      <a-input-number v-model:value="ruleForm.sortValue" min="0" allowClear placeholder="请输入" />
+    </a-form-item>
+    <a-form-item label="地址栏路径" name="path" tooltip="前浏览器地址栏 # 号后的路径">
+      <a-input v-model:value="ruleForm.path" allowClear placeholder="请输入" />
+    </a-form-item>
+    <a-form-item label="页面路径" name="component" tooltip="前端项目src/views后的页面路径">
+      <a-input
+        v-model:value="ruleForm.component"
+        addon-before="@/views"
+        allowClear
+        placeholder="请输入"
+      />
+    </a-form-item>
+    <a-form-item label="菜单图标" name="icon">
+      <a-input v-model:value="ruleForm.icon" allowClear placeholder="请输入/选择">
+        <template #addonAfter>
+          <a-popover placement="top" trigger="click">
+            <AppstoreOutlined />
+            <template #content>
+              <div class="h-200px w-200px overflow-y-auto grid grid-cols-5">
+                <div
+                  v-for="icon in iconNameList"
+                  :key="icon"
+                  class="cursor-pointer h-35px text-20px"
+                >
+                  <a-tooltip class="box-item" effect="dark" :content="icon" placement="top">
+                    <a-icon @click="handleIcon(icon)">
+                      <component :is="icon"></component>
+                    </a-icon>
+                  </a-tooltip>
+                </div>
               </div>
-            </div>
-          </el-popover>
+            </template>
+          </a-popover>
         </template>
-      </el-input>
-    </el-form-item>
-    <el-form-item label="描述" prop="describe">
-      <el-input
-        v-model.number="ruleForm.describe"
-        type="textarea"
-        :rows="4"
-        :autosize="false"
-        clearable
+      </a-input>
+    </a-form-item>
+    <a-form-item label="描述" name="describe">
+      <a-textarea
+        v-model:value="ruleForm.describe"
+        placeholder="请输入/选择"
+        :autosize="{ minRows: 2, maxRows: 6 }"
+        showCount
+        allowClear
+        :maxlength="200"
       />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"> 保存 </el-button>
-      <el-button @click="resetForm">重置</el-button>
-      <el-button type="danger" @click="deleteMenuNode" v-if="ruleForm.id">删除</el-button>
-      <el-button @click="goBack">返回</el-button>
-    </el-form-item>
-  </el-form>
+    </a-form-item>
+    <a-form-item>
+      <a-space>
+        <a-button type="primary" @click="submitForm"> 保存 </a-button>
+        <a-button @click="resetForm">重置</a-button>
+        <a-button type="default" @click="deleteMenuNode" v-if="ruleForm.id">删除</a-button>
+        <a-button @click="goBack">返回</a-button>
+      </a-space>
+    </a-form-item>
+  </a-form>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="less"></style>
