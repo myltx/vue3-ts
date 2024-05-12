@@ -75,19 +75,7 @@ async function deleteMenuNode() {
     class: 'test'
   })
 }
-function underscoreToCamel(str: string) {
-  return str.replace(/_([a-z])/g, function (match: any, letter: any) {
-    return letter.toUpperCase()
-  })
-}
 function setFormData(data: any) {
-  for (const key in data) {
-    data[underscoreToCamel(key)] = data[key]
-    const regex = /_/
-    if (regex.test(key)) {
-      delete data[key]
-    }
-  }
   ruleForm = Object.assign(ruleForm, data)
 }
 defineExpose({

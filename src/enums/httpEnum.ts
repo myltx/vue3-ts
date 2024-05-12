@@ -33,4 +33,5 @@ export enum ContentTypeEnum {
 export enum ApiPrefixEnum {
   USER = '/user',
   MENU = '/menu',
+  ROLE = '/role',
 }
