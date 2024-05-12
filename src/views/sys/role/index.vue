@@ -10,17 +10,25 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'operation'">
           <a-space>
-            <a-button type="link" size="small" @click="handleEdit(record)">编辑</a-button>
-            <a-button type="link" size="small" color="green" @click="handleMenu(record)"
-              >菜单管理</a-button
+            <a-button type="link" size="small" @click="handleEdit(record)" v-if="record?.isDef != 1">
+              编辑
+            </a-button>
+            <a-button
+              type="link"
+              size="small"
+              color="green"
+              @click="handleMenu(record)"
+              v-if="record?.isDef != 1"
             >
+              菜单管理
+            </a-button>
             <a-popconfirm
               title="确定删除吗?"
               @confirm="hanldeDelete(record)"
               cancel-text="取消"
               ok-text="确定"
             >
-              <a-button type="link" danger size="small">删除</a-button>
+              <a-button type="link" danger size="small" v-if="record?.isDef != 1">删除</a-button>
             </a-popconfirm>
           </a-space>
         </template>
