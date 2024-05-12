@@ -9,7 +9,7 @@
       <a-form-item label="id" name="id" v-show="false">
         <a-input v-model:value="formState.id" />
       </a-form-item>
-      <a-form-item required label="用户名" name="userName" tooltip="也是作为账号登录的不可以修改">
+      <a-form-item required label="用户名" name="userName" tooltip="这是作为账号登录的新增后不可以修改">
         <a-input
           v-model:value="formState.userName"
           placeholder="请输入用户名称"
@@ -31,6 +31,7 @@
           v-model:value="formState.roleCode"
           mode="multiple"
           placeholder="请选择"
+          :disabled="!!formState.isDef"
           :max-tag-count="2"
         >
           <a-select-option :value="role.roleCode" v-for="role in roleList" :key="role.roleCode">
