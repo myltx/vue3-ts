@@ -14,7 +14,7 @@ const { accountLogin } = useUserStore()
 const loginFromRef = ref()
 const loginLoading = ref(false)
 const form: SubmitLoginData = reactive({
-  userName: 'myltx1',
+  userName: 'admin',
   password: '123456'
 })
 const rules: Record<string, Rule[]> = {
