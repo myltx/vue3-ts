@@ -11,9 +11,17 @@
       <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
         <div class="logo" />
         <a-menu v-model:selectedKeys="selectedKeys" mode="inline" @click="menuClick">
-          <a-menu-item key="/menu">
+          <a-menu-item key="user">
+            <user-outlined />
+            <span>用户管理</span>
+          </a-menu-item>
+          <a-menu-item key="menu">
             <user-outlined />
             <span>菜单管理</span>
+          </a-menu-item>
+          <a-menu-item key="role">
+            <user-outlined />
+            <span>角色管理</span>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
@@ -75,12 +83,12 @@ import { useDarkMode } from '@/composables'
 
 const router = useRouter()
 const { toggleDarkMode, themeConfig } = useDarkMode()
-const selectedKeys = ref<string[]>(['1'])
+const selectedKeys = ref<string[]>(['user'])
 const collapsed = ref<boolean>(false)
 
 const menuClick: MenuProps['onClick'] = ({ key }) => {
   const path: any = key
-  router.push(path)
+  router.push(`/${path}`)
 }
 </script>
 <style></style>
