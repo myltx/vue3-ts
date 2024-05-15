@@ -58,7 +58,7 @@ async function onSubmit() {
           class="bg-white w-50% h-100% left-container flex flex-wrap rounded-tl-0 rounded-tr-41.39px rounded-br-41.39px rounded-bl-0"
         >
           <div class="w-100% h-100px flex items-center p-20px">
-            <img src="@/assets/images/logo.png" class="w-60px h-60px rounded-full mr-20px" />
+            <img src="@/assets/images/logo.gif" class="w-60px h-60px rounded-full mr-20px" />
             <div class="text-28px color-#333 font-bold title">后台管理系统</div>
           </div>
           <div class="mt--150px mx-auto">
