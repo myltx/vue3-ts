@@ -9,17 +9,20 @@
   >
     <a-layout class="h-100vh">
       <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
-        <div class="logo" />
+        <div class="flex items-center justify-start h-50px px-10px cursor-pointer" @click="goHome">
+          <img src="@/assets/images/sub-logo.gif" class=" w-40px h-40px rounded-full mr-10px"/>
+          <div v-if="!collapsed" class="font-bold text-20px">后台系统</div>
+        </div>
         <a-menu v-model:selectedKeys="selectedKeys" mode="inline" @click="menuClick">
-          <a-menu-item key="user">
+          <a-menu-item key="/user">
             <user-outlined />
             <span>用户管理</span>
           </a-menu-item>
-          <a-menu-item key="menu">
+          <a-menu-item key="/menu">
             <user-outlined />
             <span>菜单管理</span>
           </a-menu-item>
-          <a-menu-item key="role">
+          <a-menu-item key="/role">
             <user-outlined />
             <span>角色管理</span>
           </a-menu-item>
@@ -82,13 +85,25 @@ import { UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/
 import { useDarkMode } from '@/composables'
 
 const router = useRouter()
+const route = useRoute()
+
 const { toggleDarkMode, themeConfig } = useDarkMode()
-const selectedKeys = ref<string[]>(['user'])
+const selectedKeys = ref<string[]>([route.fullPath])
 const collapsed = ref<boolean>(false)
 
 const menuClick: MenuProps['onClick'] = ({ key }) => {
   const path: any = key
-  router.push(`/${path}`)
+  router.push(`${path}`)
+}
+const goHome = () => {
+  router.push('/')
+  selectedKeys.value = ['/']
 }
 </script>
-<style></style>
+<style>
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 16px;
+}
+</style>

@@ -6,7 +6,7 @@ const { themeConfig } = useDarkMode()
 setTimeout(() => {
   themeConfig.value = theme.darkAlgorithm
 }, 2000)
-console.log(themeConfig.value, 'themeConfig')
+// console.log(themeConfig.value, 'themeConfig')
 </script>
 <template>
   <RouterView />

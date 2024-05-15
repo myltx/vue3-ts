@@ -2,9 +2,9 @@
   <a-dropdown>
     <div @click.prevent class="flex items-center cursor-pointer">
       <a-avatar :size="26" class="mr-10px">
-        <template #icon> {{ userInfo.user_name?.substring(0, 1) }} </template>
+        <template #icon> {{ userInfo.nikeName?.substring(0, 1) }} </template>
       </a-avatar>
-      {{ userInfo.user_name }}
+      {{ userInfo.nikeName }}
     </div>
     <template #overlay>
       <a-menu @click="onClick">
@@ -19,7 +19,7 @@
   </a-dropdown>
 </template>
 <script lang="ts" setup>
-import type { MenuProps } from 'ant-design-vue'
+import { Modal, type MenuProps } from 'ant-design-vue'
 
 import { getUserInfo, removeLocalStorage } from '@/utils'
 
@@ -38,7 +38,14 @@ function handleGoPath(path: string) {
 const onClick: MenuProps['onClick'] = ({ key }) => {
   console.log(`Click on item ${key}`)
   if (key === 'loginOut') {
-    handleLoginOut()
+    Modal.confirm({
+      title: '确定退出吗？',
+      okText: '确定',
+      cancelText: '取消',
+      onOk() {
+        handleLoginOut()
+      }
+    })
   }
 }
 </script>
