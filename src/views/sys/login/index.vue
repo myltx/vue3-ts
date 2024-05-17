@@ -24,18 +24,20 @@ const rules: Record<string, Rule[]> = {
 async function onSubmit() {
   loginLoading.value = true
   const data = await loginFromRef.value.validate()
-  console.log(data, 'data')
   try {
     const { userName, password } = form
-    await accountLogin({
-      userName,
-      password: encryption.encryptByAES(userName + password)
-    })
-    message.success('登录成功')
+    await accountLogin(
+      {
+        userName,
+        password: encryption.encryptByAES(userName + password)
+      },
+      () => {
+        replace('/')
+      }
+    )
     loginLoading.value = false
-    replace('/')
   } catch (error) {
-    console.log(error)
+    // message.warning('登录失败')
     loginLoading.value = false
   }
 
