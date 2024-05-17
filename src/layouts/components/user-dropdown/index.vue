@@ -8,11 +8,17 @@
     </div>
     <template #overlay>
       <a-menu @click="onClick">
-        <a-menu-item :key="'user'">
-          <a href="javascript:;">个人中心</a>
+        <a-menu-item :key="'person'">
+          <a href="javascript:;"><UserOutlined class="mr-2px" /> 个人中心</a>
+        </a-menu-item>
+        <a-menu-item :key="'admin'">
+          <a href="javascript:;"><GithubOutlined class="mr-2px" /> 前端源码</a>
+        </a-menu-item>
+        <a-menu-item :key="'node'">
+          <a href="javascript:;"><GithubOutlined class="mr-2px" /> 后端源码</a>
         </a-menu-item>
         <a-menu-item :key="'loginOut'">
-          <a href="javascript:;">退出登录</a>
+          <a href="javascript:;"><LoginOutlined class="mr-2px" /> 退出登录</a>
         </a-menu-item>
       </a-menu>
     </template>
@@ -46,6 +52,12 @@ const onClick: MenuProps['onClick'] = ({ key }) => {
         handleLoginOut()
       }
     })
+  } else if (key === 'person') {
+    handleGoPath(key)
+  } else if (key === 'admin') {
+    window.open('https://github.com/myltx/vue3-ts')
+  } else if (key === 'node') {
+    window.open('https://github.com/myltx/note-service')
   }
 }
 </script>

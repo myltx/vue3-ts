@@ -1,48 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Index from '@/views/index/index.vue'
-import Login from '@/views/sys/login/index.vue'
-import Menu from '@/views/sys/menu/index.vue'
-import Layout from '@/layouts/index.vue'
 import { getToken } from '@/utils'
 import { start, close } from '@/utils/nprogress'
+import { staticRouter } from './model/staticRouter'
+import {getMenuTree} from './model/asyncRouter'
 
+getMenuTree()
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'Layouts',
-      component: Layout,
-      redirect: '/index',
-      children: [
-        {
-          path: '/index',
-          name: 'Index',
-          component: Index
-        },
-        {
-          path: '/menu',
-          name: 'Menu',
-          component: Menu
-        },
-        {
-          path: '/role',
-          name: 'Role',
-          component: () => import('@/views/sys/role/index.vue')
-        },
-        {
-          path: '/user',
-          name: 'User',
-          component: () => import('@/views/sys/user/index.vue')
-        }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    }
-  ]
+  routes: staticRouter
 })
 
 router.beforeEach((to, from, next) => {
