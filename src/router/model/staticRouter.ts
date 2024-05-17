@@ -29,6 +29,11 @@ export const staticRouter = [
         path: '/user',
         name: 'User',
         component: () => import('@/views/sys/user/index.vue')
+      },
+      {
+        path: '/person',
+        name: 'Person',
+        component: () => import('@/views/sys/person/index.vue')
       }
     ]
   },

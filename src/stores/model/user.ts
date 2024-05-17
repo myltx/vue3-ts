@@ -17,12 +17,12 @@ const useUserStore = defineStore('useUSerStore', () => {
     setToken(loginData.data.token)
     handleSuccess(callBack)
   }
-  async function handleSuccess(callBack) {
+  async function handleSuccess(callBack?: Function) {
     try {
       const userInfo: any = await getUserInfo()
       userInfo.value = userInfo.data
       setUserInfo(userInfo?.data)
-      message.success('登录成功')
+      callBack && message.success('登录成功')
       callBack && callBack()
     } catch (err) {
       // message.warning('登录失败')

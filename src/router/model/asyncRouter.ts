@@ -1,8 +1,6 @@
 import { getMenuTreeByUserAndRole } from '@/api/sys/menu'
 
-getMenuTree()
-async function getMenuTree() {
+export async function getMenuTree() {
   const data = await getMenuTreeByUserAndRole({})
   console.log(data)
 }
-
