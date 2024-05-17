@@ -36,6 +36,13 @@ export const getMenuTree = (data: any): any =>
     data
   })
 
+export const getMenuTreeByUserAndRole = (data: any): any =>
+  Axios({
+    method: 'post',
+    url: `${ApiPrefixEnum.MENU}/getTreeByUserAndRole`,
+    data
+  })
+
 export const getMenuTreeDetail = (data: any): any =>
   Axios({
     method: 'post',

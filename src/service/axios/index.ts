@@ -90,10 +90,10 @@ const httpServer = (config: any) => {
   return new Promise((resolve, reject) => {
     axios(httpDefaultOpts)
       .then((response) => {
-        handleSuccess(response, resolve, config)
+        handleSuccess(response, resolve, reject)
       })
       .catch((error) => {
-        handleError(error, reject, config)
+        handleError(error, reject)
       })
   })
 }

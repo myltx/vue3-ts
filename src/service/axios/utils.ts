@@ -1,28 +1,30 @@
 import { removeLocalStorage } from '@/utils'
 import { TIMEOUT, OTHER, NOLOGIN } from './error-code'
-import { message,Modal } from 'ant-design-vue'
+import { message, Modal } from 'ant-design-vue'
 
 const LOGIN_OUT_PATH = '/login'
 
 // 成功处理函数
-export function handleSuccess(res: any, resolve: Function) {
+export function handleSuccess(res: any, resolve: Function, reject: Function) {
   const data: any = res.data
   if (data.success == false) {
     // 未登录
     if (NOLOGIN.includes(data.code)) {
       Modal.info({
-        content:data.msg || data.message,
+        content: data.msg || data.message,
         onOk() {
           removeLocalStorage()
           window.location.hash = LOGIN_OUT_PATH
-        },
-      });
+        }
+      })
     } else {
       const msg: any = data.msg || data.message
       message.warning(msg)
+      reject(data)
     }
+  } else {
+    resolve(data)
   }
-  resolve(data)
 }
 
 // 失败处理函数
@@ -37,22 +39,22 @@ export function handleError(error: any, reject: Function) {
     }
     if (NOLOGIN.includes(error.response.data.code)) {
       Modal.info({
-        content:error.response.data.errorMsg || error.response.data.msg,
+        content: error.response.data.errorMsg || error.response.data.msg,
         onOk() {
           removeLocalStorage()
           window.location.hash = LOGIN_OUT_PATH
-        },
-      });
+        }
+      })
     } else {
       const resData = error.response.data
       if (OTHER.includes(resData.code)) {
         Modal.info({
-          content:error.response.data.errorMsg || error.response.data.msg,
+          content: error.response.data.errorMsg || error.response.data.msg,
           onOk() {
             removeLocalStorage()
             window.location.hash = LOGIN_OUT_PATH
-          },
-        });
+          }
+        })
       } else if (resData.msg) {
         message.warning(resData.msg)
       } else if (resData.message) {
