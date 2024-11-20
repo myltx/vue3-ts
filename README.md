@@ -9,6 +9,9 @@
 - [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import)
 - [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components)
 
+## 后端代码
+[note-service](https://github.com/myltx/note-service)
+
 ## Vscode Plugins
 
 - [Unot](https://marketplace.visualstudio.com/items?itemName=simonhe.unot)
@@ -52,13 +55,20 @@ pnpm add --save-dev husky
 pnpm exec husky init
 
 ```
+- 提交时推荐使用 cz-cli
+```shell
+# 添加变更文件
+git add .
+# 使用 cz-cli 提交
+git cz 
+# 推送
+git push
+```
 ## Git校验
 
 - [husky](https://typicode.github.io/husky/)
 - [commitlint](https://commitlint.js.org/)
 - [cz-cli](https://github.com/commitizen/cz-cli)
-
-## Git 贡献提交规范
 
 - 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
 
