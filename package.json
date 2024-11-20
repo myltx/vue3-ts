@@ -15,7 +15,7 @@
     "format": "prettier --write src/",
     "prepare": "husky",
     "lint:style": "lint-staged",
-    "commit": "cz",
+    "commit": "git add . && cz",
     "commitlint": "commitlint --config commitlint.config.ts --edit",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
